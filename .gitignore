@@ -1,0 +1,6 @@
+erl_crash.dump
+simple_cache.rel
+simple_cache.boot
+simple_cache.script
+tmp
+*.beam
