@@ -3,6 +3,7 @@
 compile:
 	erlc -o ./simple_cache/ebin ./simple_cache/src/*.erl
 	erlc -o ./resource_discovery/ebin ./resource_discovery/src/*.erl
+	erlc -o ./tcp_interface/ebin ./tcp_interface/src/*.erl
 
 contact1:
 	erl -sname contact1
@@ -16,6 +17,12 @@ cache2:
 cache3:
 	erl -sname cache3 -boot ./simple_cache -config ./sys #-detached
 
-make_dev:
-	erl -sname cache_dev -pa ./simple_cache/ebin -pa ./resource_discovery/ebin
+dev1:
+	erl -sname cache_dev1 \
+	-pa ./simple_cache/ebin -pa ./resource_discovery/ebin -pa ./tcp_interface/ebin \
+	-eval "[application:start(A) || A <- [sasl, mnesia, resource_discovery, simple_cache]]."
 
+dev2:
+	erl -sname cache_dev2 \
+	-pa ./simple_cache/ebin -pa ./resource_discovery/ebin -pa ./tcp_interface/ebin \
+	-eval "[application:start(A) || A <- [sasl, mnesia, resource_discovery, simple_cache, tcp_interface]]."

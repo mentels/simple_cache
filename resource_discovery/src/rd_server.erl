@@ -44,7 +44,7 @@ init([]) ->
                 found_resource_tuples = dict:new()}}.
 
 handle_call({fetch_resources, Type}, _From, State) ->
-    {reply, dict:ifnd(Type, State#state.found_resource_tuples), State}.
+    {reply, dict:find(Type, State#state.found_resource_tuples), State}.
 
 handle_cast({add_target_resource_type, Type}, State) ->
     TargetTypes = State#state.target_resource_types,
